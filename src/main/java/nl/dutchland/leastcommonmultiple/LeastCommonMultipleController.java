@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class LeastCommonMultipleController {
 
     @RequestMapping("/leastcommonmultiple/from/{from}/until/{until}")
-    public int leastCommonMultiple(@PathVariable(value="from") int from, @PathVariable(value="until") int until) {
-            return 2520;
+    public long leastCommonMultiple(@PathVariable(value="from") int from, @PathVariable(value="until") int until) {
+        LeastCommonMultiple leastCommonMultiple = new LeastCommonMultiple(from, until);
+            return leastCommonMultiple.value().longValue();
     }
 }
