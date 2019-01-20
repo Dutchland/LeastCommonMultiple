@@ -33,4 +33,10 @@ public class LeastCommonMultipleControllerTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value(26771144400L));
     }
+
+    @Test
+    public void invalidRange_negativeRange_returnsBadRequest() throws Exception{
+        this.mockMvc.perform(get("/leastcommonmultiple/from/{from}/until/{until}", -1, 1))
+                .andExpect(status().isBadRequest());
+    }
 }
