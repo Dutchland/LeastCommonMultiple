@@ -1,7 +1,6 @@
 package nl.dutchland.leastcommonmultiple;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -26,5 +25,12 @@ public class LeastCommonMultipleControllerTests {
         this.mockMvc.perform(get("/leastcommonmultiple/from/{from}/until/{until}", 1, 10))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value(2520));
+    }
+
+    @Test
+    public void leastCommonMultiple_1to25() throws Exception{
+        this.mockMvc.perform(get("/leastcommonmultiple/from/{from}/until/{until}", 1, 25))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value(26771144400L));
     }
 }
