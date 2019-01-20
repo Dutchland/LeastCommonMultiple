@@ -9,7 +9,7 @@ public class LeastCommonMultipleController {
 
     @RequestMapping("/leastcommonmultiple/from/{from}/until/{until}")
     public long leastCommonMultiple(@PathVariable(value="from") int from, @PathVariable(value="until") int until) {
-        LeastCommonMultiple leastCommonMultiple = new LeastCommonMultiple(from, until);
+        LeastCommonMultiple leastCommonMultiple = LeastCommonMultiple.ofInclusiveRange(from, until);
             return leastCommonMultiple.value().longValue();
     }
 }

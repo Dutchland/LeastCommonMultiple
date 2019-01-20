@@ -6,13 +6,23 @@ import java.util.Queue;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static nl.dutchland.leastcommonmultiple.Assertions.assertLargerThanZero;
+import static nl.dutchland.leastcommonmultiple.Assertions.assertTrue;
+
 public class LeastCommonMultiple {
     private final int from;
     private final int until;
 
-    public LeastCommonMultiple(int from, int until) {
+    private LeastCommonMultiple(int from, int until) {
         this.from = from;
         this.until = until;
+    }
+
+    public static LeastCommonMultiple ofInclusiveRange(int from, int until) {
+        assertLargerThanZero(from, () -> { throw new IllegalArgumentException("Start of the range has to be bigger than zero"); });
+        assertTrue(until >= from, () -> { throw new IllegalArgumentException("End of the range has to be bigger than the start"); });
+
+        return new LeastCommonMultiple(from, until);
     }
 
     public BigInteger value() {
