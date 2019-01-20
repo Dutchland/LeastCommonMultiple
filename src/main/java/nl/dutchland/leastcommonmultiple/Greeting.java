@@ -1,4 +1,4 @@
-package hello;
+package nl.dutchland.leastcommonmultiple;
 
 public class Greeting {
 
