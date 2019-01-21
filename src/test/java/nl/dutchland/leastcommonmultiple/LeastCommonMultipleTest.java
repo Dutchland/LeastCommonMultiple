@@ -36,13 +36,27 @@ public class LeastCommonMultipleTest {
     }
 
     @Test
+    public void testInvalidRange_EndOfRangeCannotExeed42() {
+        // Arrange
+        Executable endSmallerThanStartRange = () -> LeastCommonMultiple.ofInclusiveRange(1, 43);
+
+        // Act
+        IllegalArgumentException thrownException = Assertions.assertThrows(IllegalArgumentException.class,
+                endSmallerThanStartRange);
+
+        // Assert
+        Assertions.assertEquals("End of range cannot exceed 42", thrownException.getMessage());
+    }
+
+    @Test
     public void testValues() {
         Assertions.assertAll(
                 () -> testLeastCommonMultiple(8,  8, 8),
                 () -> testLeastCommonMultiple(2, 5 , 60),
                 () -> testLeastCommonMultiple(1, 10 , 2520),
                 () -> testLeastCommonMultiple(1, 15 , 360360),
-                () -> testLeastCommonMultiple(1, 20 , 232792560));
+                () -> testLeastCommonMultiple(1, 20 , 232792560),
+                () -> testLeastCommonMultiple(1, 25, 26771144400L));
     }
 
     private void testLeastCommonMultiple(int from, int until, long expectedAnswer) {

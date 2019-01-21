@@ -1,0 +1,55 @@
+APPLICATIE RUNNEN:
+1. Run: mvn package
+2. Run: java -jar target/gs-spring-boot-0.1.0.jar
+3. Test de API (met bijvoorbeeld curl of Postman)
+URL is: localhost:8080/api/leastcommonmultiple/from/{start}/until/{until}
+
+TESTS RUNNEN:
+Om alle tests te runnen (zowel Unit als Integratietests) run je: mvn clean test
+
+
+ANTWOORD voor range 1-25 (inclusive):
+Het antwoord is: 26771144400 (past niet meer in 32 bit)
+Zie ook de Unittest en de Integratie test in respectievelijk LeastCommonMultipleTest en LeastCommonMultipleControllerTests
+
+AANPAK:
+Algoritme:
+Het algoritme heb ik uiteraard niet zelf bedacht. Als goede engineer heb ik dit opgezocht, om kostbare tijd te besparen.
+Wel heb ik het gevonden algorithme (wat gebruik maakte van een for-loop) omgezet naar een recursieve functie.
+Gezien de recursieve aard van dit probleem vond ik dit wel zo mooi.
+
+Performance optimalisatie:
+Ik heb gekozen op mijn code niet te optimaliseren, geen caching, lazy of andere dingen.
+Het runnen van het algorithme met range 1-25 duurde maar enkele miliseconden. Zonde dus om tijd te besteden aan optimalisatie.
+
+Aandachtspunten bij input:
+Na wat kort testen blijkt dat vanaf een range 1-43 er een long-overflow ontstaat.
+Ik was eigenlijk aan het testen wanneer er een stack-overflow zou ontstaan, maar dat blijkt dus in ieder geval pas na 43 te ontstaan.
+Heb dus gekozen om ranges die eindigen op 43 of meer niet te accepteren, en een nette errormelding te retourneren.
+Vanwege de gigantische hoeveelheid benodigde rekenkracht bij hogere inputs zou er sowieso wel een maximum opgezet moeten worden. Heb dit maximum nu dus op 43 gezet.
+
+Specificaties --> Testen:
+Ik heb TDD gewerkt met unittests voor classes en integratietests om het gedrag van het endpoint te specificeren.
+Ben begonnen met de happy-flow voor een aantal inputs waarvoor ik het antwoord al wist, daarna specificaties geschreven voor de edge cases.
+
+Deze tests zijn zo geschreven dat deze als functionele documentatie dienen voor het project.
+
+
+TECHNISCHE DOCUMENTATIE:
+Algemeen:
+- Maven
+- Spring Boot
+
+Tests:
+ - JUnit5 (Jupiter)
+ - MockMvc van Spring Boot
+
+Exception handling:
+Ik gebruik de Spring ResponseEntityExceptionHandler voor het mappen van exceptions naar de juiste Http responses. Normalitair zou hier uiteraard ook logging worden ingebouwd.
+
+
+REST-ENDPOINT ontwerp:
+localhost:8080/api/leastcommonmultiple/from/{start}/until/{until}
+
+Ik heb gekozen voor path parameters voor de input. Queryparameters zijn in REST optioneel en aangezien de parameters hier duidelijk niet optioneel waren is dit geen optie.
+Het liefste had ik een object mee willen sturen om de range te definieeren maar dit kan niet zonder van een GET een POST te maken.

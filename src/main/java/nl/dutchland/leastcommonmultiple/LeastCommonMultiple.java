@@ -19,6 +19,7 @@ public class LeastCommonMultiple {
     }
 
     public static LeastCommonMultiple ofInclusiveRange(int from, int until) {
+        assertTrue(until <= 42, () -> { throw new IllegalArgumentException("End of range cannot exceed 42"); });
         assertLargerThanZero(from, () -> { throw new IllegalArgumentException("Start of the range has to be bigger than zero"); });
         assertTrue(until >= from, () -> { throw new IllegalArgumentException("End of the range has to be bigger than the start"); });
 
