@@ -35,7 +35,6 @@ public class LeastCommonMultipleTest {
         Assertions.assertEquals("End of the range has to be bigger than the start", thrownException.getMessage());
     }
 
-
     @Test
     public void testValues() {
         Assertions.assertAll(

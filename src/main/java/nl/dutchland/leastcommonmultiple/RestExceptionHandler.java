@@ -9,18 +9,17 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class RestExceptionHandler
-        extends ResponseEntityExceptionHandler {
+public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
-    protected ResponseEntity<Object> handleConflict(IllegalArgumentException ex, WebRequest request) {
-        return handleExceptionInternal(ex, ex.getMessage(),
+    protected ResponseEntity<Object> handleConflict(IllegalArgumentException exception, WebRequest request) {
+        return handleExceptionInternal(exception, exception.getMessage(),
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler(RuntimeException.class)
-    protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
-        return handleExceptionInternal(ex, "Something went wrong. Contact your administrator.",
-                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    protected ResponseEntity<Object> handleConflict(RuntimeException exception, WebRequest request) {
+        return handleExceptionInternal(exception, "Something went wrong. Contact your administrator.",
+                new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 }
