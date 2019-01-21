@@ -1,11 +1,12 @@
 APPLICATIE RUNNEN:
 1. Run: mvn package
-2. Run: java -jar target/gs-spring-boot-0.1.0.jar
+2. Run: java -jar target/leastcommonmultiple-0.1.0.jar
 3. Test de API (met bijvoorbeeld curl of Postman)
 URL is: localhost:8080/api/leastcommonmultiple/from/{start}/until/{until}
 
 TESTS RUNNEN:
-Om alle tests te runnen (zowel Unit als Integratietests) run je: mvn clean test
+Om alle tests te runnen (zowel Unit als Integratietests) run je: mvn clean test.
+Of uiteraard individuele tests rechstreeks vanuit een IDE.
 
 
 ANTWOORD voor range 1-25 (inclusive):
