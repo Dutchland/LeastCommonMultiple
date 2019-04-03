@@ -45,5 +45,6 @@
                 <version>2.1.2.RELEASE</version>
             </plugin>
         </plugins>
+        <finalName>leastcommonmultiple</finalName>
     </build>
 </project>
